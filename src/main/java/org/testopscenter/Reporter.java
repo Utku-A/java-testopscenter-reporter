@@ -3,6 +3,7 @@ package org.testopscenter;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONString;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -10,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Reporter {
 
-    public static void connect_report(String team_key, String platform, String version) {
-        session_id = getSessionID(team_key,platform,version);
+    public static void connect_report(String team_key, String platform, String version, String tools) {
+        session_id = getSessionID(team_key,platform,version,tools);
     }
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -26,58 +27,70 @@ public class Reporter {
 
 
 
-    public static void saveTestResults(String testResult, String testName, String testDescription) {
+    public static void saveTestResults(String testResult, String testName, String testDescription, String tools) {
         JSONObject jsonResult = new JSONObject();
-        sendTestResult(testDescription,testResult);
+        sendTestResult(testDescription,testResult,tools);
 
-        jsonResult.put("test-name",testName);
-        jsonResult.put("description",testDescription);
-        jsonResult.put("result",testResult);
+        jsonResult.put("test_name",testName +" - "+ testDescription);
+        jsonResult.put("test_result",testResult);
         testResultArrayJson.put(jsonResult);
         testResultsJson.put("tests", testResultArrayJson);
     }
 
-    public static String getSessionID(String team_key, String platform, String version) {
-        OkHttpClient client = new OkHttpClient();
-        String url = TestNG_Report.url + "get_automation_session/"+team_key+"/"+platform+"/"+version;
+    public static String getSessionID(String team_key, String platform, String version, String tools) {
+        JSONObject object = new JSONObject();
+        object.put("team_key",team_key);
+        object.put("platform",platform);
+        object.put("version",version);
 
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
+        String response = send_request_api("get_automation_session",object,tools);
+        return extractSessionID(response);
 
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                ResponseBody responseBody = response.body();
-                if (responseBody != null) {
-                    String jsonResponse = responseBody.string();
-                    return jsonResponse.split("\"Session_ID\"")[1].split(":")[1]
-                            .replaceAll("[\", ]", "")
-                            .replace("\n","")
-                            .replace("}","");
-                } else {
-                    System.out.println("Response body is null.");
-                }
-            } else {
-                System.out.println("HTTP GET request failed with response code: " + response.code());
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return "None";
     }
 
-    public static void sendTestResult(String testName, String result) {
+    private static String extractSessionID(String jsonResponse) {
+
+        String sessionID = "None";
+        try {
+            sessionID = jsonResponse.split("\"Session_ID\"")[1].split(":")[1]
+                    .replaceAll("[\", ]", "")
+                    .replace("\n", "")
+                    .replace("}", "")
+                    .replace("Start_Time","");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Session_ID not found in the response.");
+        }
+        return sessionID;
+    }
+
+    public static void sendTestResult(String testName, String result, String tools) {
         JSONObject object = new JSONObject();
         object.put("session_id",session_id);
-        object.put("testname",testName);
-        object.put("result",result);
+        object.put("test_name",testName);
+        object.put("test_result",result);
+        String response = send_request_api("save-test-result",object,tools);
 
+    }
+
+    public static void stopTestRunningStatus(String tools) {
+        JSONObject object = new JSONObject();
+        object.put("session_id",session_id);
+        String response = send_request_api("stop-automation-session",object,tools);
+
+    }
+
+
+    public static void print(Object text) {
+        System.out.println(text);
+    }
+
+    public static String send_request_api(String path, JSONObject data, String tools) {
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, String.valueOf(object));
+        RequestBody body = RequestBody.create(mediaType, String.valueOf(data));
+        String responseString = "";
 
         Request request = new Request.Builder()
-                .url(url + "add-test-result/testng")
+                .url(url + path + "/"+ tools)
                 .post(body)
                 .build();
 
@@ -89,16 +102,13 @@ public class Reporter {
 
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
-                int responseCode = response.code();
+                assert response.body() != null;
+                responseString = response.body().string();
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            print("Server Error");
         }
-    }
-
-
-    public static void print(Object text) {
-        System.out.println(text);
+        return responseString;
     }
 
     public static void viewTestResult() {
@@ -108,17 +118,16 @@ public class Reporter {
 
         for (int i = 0; i < testResultArrayJson.length(); i++) {
             JSONObject test = testResultArrayJson.getJSONObject(i);
-            String testResult = test.getString("result");
-            String testName = test.getString("test-name");
-            String testDescription = test.getString("description");
+            String testResult = test.getString("test_result");
+            String testName = test.getString("test_name");
             int count = i+1;
 
             if (Objects.equals(testResult, "Done")) {
-                print(count+". "+ANSI_GREEN+testName+" - "+testDescription+ANSI_RESET);
+                print(count+". "+ANSI_GREEN + testName + ANSI_RESET);
             } else if (Objects.equals(testResult, "Fail")) {
-                print(count+". "+ANSI_RED+testName+" - "+testDescription+ANSI_RESET);
+                print(count+". "+ANSI_RED + testName + ANSI_RESET);
             } else {
-                print(count+". "+ANSI_YELLOW+testName+" - "+testDescription+ANSI_RESET);
+                print(count+". "+ANSI_YELLOW + testName + ANSI_RESET);
             }
 
         }

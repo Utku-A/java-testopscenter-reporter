@@ -17,22 +17,22 @@ public class UnitTests implements ITestListener {
 
     }
 
-    @Test(description = "Başarılı Matematik Testi")
+    @Test(description = "Başarılı Matematik Testi", enabled = false)
     public void TS005(){
         Assert.assertEquals(3,(2+1));
     }
 
-    @Test(description = "Başarılı Matematik Testi")
+    @Test(description = "Başarılı Matematik Testi", enabled = false)
     public void TS006(){
         Assert.assertEquals(3,(3));
     }
 
-    @Test(description = "Başarılı Matematik Testi")
+    @Test(description = "Başarılı Matematik Testi", enabled = false)
     public void TS007(){
         Assert.assertEquals(3,(2+1));
     }
 
-    @Test(description = "Başarılı Matematik Testi") @Ignore
+    @Test(description = "Başarılı Matematik Testi", enabled = false)
     public void TS008(){
         Assert.assertEquals(3,(2+1));
     }

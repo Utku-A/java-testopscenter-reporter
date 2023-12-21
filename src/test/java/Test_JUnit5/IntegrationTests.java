@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testopscenter.JUnit5_Report;
 
 
@@ -13,7 +12,7 @@ public class IntegrationTests {
 
     @BeforeAll()
     public static void set_up() {
-        JUnit5_Report.connect_report("team-oBk0k9lj1mDxfedcO1FeZiVPWDNE9gGX94dCr0uDdRh6o","Android","");
+        JUnit5_Report.connect_report("team-oBk0k9lj1mDxfedcO1FeZiVPWDNE9gGX94dCr0uDdRh6o","IOS","Android - Stage V1.3");
     }
 
     @Test
@@ -30,7 +29,6 @@ public class IntegrationTests {
 
     @Test
     @DisplayName("Skip Test")
-    @Ignore
     public void TS003(){
         Assert.assertEquals(3,(3));
     }
