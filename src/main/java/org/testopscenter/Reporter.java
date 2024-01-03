@@ -23,7 +23,7 @@ public class Reporter {
     public static String session_id;
     public static JSONObject testResultsJson = new JSONObject();
     static JSONArray testResultArrayJson = new JSONArray();
-    static final String url = "http://127.0.0.1:3000/v1/";
+    static final String url = "https://api.testopscenter.com/v1/";
 
 
 
@@ -82,6 +82,12 @@ public class Reporter {
 
     public static void print(Object text) {
         System.out.println(text);
+    }
+
+    public static void wait(int millisecond){
+        try {
+            Thread.sleep(millisecond);
+        }catch (Exception e) {print(e.getMessage());}
     }
 
     public static String send_request_api(String path, JSONObject data, String tools) {

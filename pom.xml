@@ -11,6 +11,12 @@
     <description>TestOps Center | Test Result Reporter Alpha v0.1</description>
     <url>https://testopscenter.com</url>
 
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <organization>
         <name>TestOps Center</name>
         <url>https://testopscenter.com</url>
@@ -49,8 +55,8 @@
 
     <distributionManagement>
         <repository>
-            <id>Staging</id>
-            <url>https://s01.oss.sonatype.org/content/groups/staging</url>
+            <id>snapshots</id>
+            <url>https://repo.testopscenter.com/repository/snapshots/</url>
         </repository>
     </distributionManagement>
 
@@ -62,30 +68,24 @@
     </licenses>
 
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
 
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.10.0</version>
+            <version>4.12.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20230618</version>
+            <version>20231013</version>
         </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.8.0</version>
+            <version>7.9.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -99,7 +99,7 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
-            <version>3.2.5</version>
+            <version>3.9.6</version>
         </dependency>
 
 
@@ -133,6 +133,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <keyname>1FF821E1A1A2DC8CE5E691D1F1A4CCE3EA7C307D</keyname>
+                </configuration>
             </plugin>
         </plugins>
     </build>

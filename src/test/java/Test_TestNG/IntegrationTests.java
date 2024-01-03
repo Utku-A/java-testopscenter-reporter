@@ -12,7 +12,7 @@ public class IntegrationTests implements ITestListener {
 
     @BeforeSuite(alwaysRun = true)
     public void TestOpsCenter_Login() {
-        TestNG_Report.connect_report("team-oBk0k9lj1mDxfedcO1FeZiVPWDNE9gGX94dCr0uDdRh6o","Android");
+        TestNG_Report.connect_report("team-oBk0k9lj1mDxfedcO1FeZiVPWDNE9gGX94dCr0uDdRh6o","IOS");
 
     }
 
@@ -23,7 +23,7 @@ public class IntegrationTests implements ITestListener {
 
     @Test(description = "Başarılı Matematik Testi")
     public void TS002(){
-        Assert.assertEquals(3,(2));
+        Assert.assertEquals(3,(3));
     }
 
     @Test(description = "Başarılı Matematik Testi")
@@ -31,7 +31,7 @@ public class IntegrationTests implements ITestListener {
         Assert.assertEquals(3,(2+1));
     }
 
-    @Test(description = "Başarılı Matematik Testi") @Ignore
+    @Test(description = "Başarılı Matematik Testi")
     public void TS004(){
         Assert.assertEquals(3,(2+1));
     }

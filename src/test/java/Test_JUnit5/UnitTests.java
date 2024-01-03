@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testng.Assert;
 import org.testopscenter.JUnit5_Report;
+import org.testopscenter.Reporter;
+
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @ExtendWith(JUnit5_Report.class)
@@ -13,25 +15,22 @@ public class UnitTests {
 
     @BeforeAll()
     public static void set_up() {
-        JUnit5_Report.connect_report("team-oBk0k9lj1mDxfedcO1FeZiVPWDNE9gGX94dCr0uDdRh6o","Android","Android - Stage V1.3");
+        JUnit5_Report.connect_report("team-oBk0k9lj1mDxfedcO1FeZiVPWDNE9gGX94dCr0uDdRh6o","Android","Android - Stage V5.3");
     }
     @Test
     @DisplayName("Başarılı Matematik Testi")
-    @Disabled
     public void TS005(){
         Assert.assertEquals(3,(2+1));
     }
 
     @Test
-    @DisplayName("Başarısız Matematik Testi")
-    @Disabled
+    @DisplayName("Hatalı Matematik Testi")
     public void TS006(){
         Assert.assertEquals(3,(3));
     }
 
     @Test()
     @DisplayName("Skip Test")
-    @Disabled()
     public void TS007(){
         assumeTrue(true,"Skip Test Deneme");
         Assert.assertEquals(3,(3));
@@ -39,8 +38,7 @@ public class UnitTests {
 
 
     @Test
-    @DisplayName("Başarılı Matematik Testi")
-    @Disabled
+    @DisplayName("Başarılı Test")
     public void TS008(){
         Assert.assertEquals(3,(2+1));
     }
