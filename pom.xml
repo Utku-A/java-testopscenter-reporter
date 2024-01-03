@@ -6,7 +6,7 @@
 
     <groupId>org.testopscenter</groupId>
     <artifactId>testopscenter</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <name>TestOps Center Test Result Reporter</name>
     <description>TestOps Center | Test Result Reporter Alpha v0.1</description>
     <url>https://testopscenter.com</url>
@@ -55,8 +55,8 @@
 
     <distributionManagement>
         <repository>
-            <id>snapshots</id>
-            <url>https://repo.testopscenter.com/repository/snapshots/</url>
+            <id>maven-releases</id>
+            <url>https://repo.testopscenter.com/repository/maven-releases</url>
         </repository>
     </distributionManagement>
 
