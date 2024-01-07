@@ -6,7 +6,7 @@
 
     <groupId>org.testopscenter</groupId>
     <artifactId>testopscenter</artifactId>
-    <version>0.1.21</version>
+    <version>0.1.3</version>
     <name>TestOps Center</name>
     <description>TestOps Center | Test Result Reporter</description>
     <url>https://testopscenter.com</url>
@@ -132,9 +132,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <keyname>1FF821E1A1A2DC8CE5E691D1F1A4CCE3EA7C307D</keyname>
-                </configuration>
             </plugin>
         </plugins>
     </build>
