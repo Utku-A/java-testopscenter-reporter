@@ -37,6 +37,16 @@ public class Reporter {
         testResultsJson.put("tests", testResultArrayJson);
     }
 
+    public static void saveTestResults(String testResult, String testName, String testDescription, String tools, String error) {
+        JSONObject jsonResult = new JSONObject();
+        sendTestResult(testDescription,testResult,tools,error);
+
+        jsonResult.put("test_name",testName +" - "+ testDescription);
+        jsonResult.put("test_result",testResult);
+        testResultArrayJson.put(jsonResult);
+        testResultsJson.put("tests", testResultArrayJson);
+    }
+
     public static String getSessionID(String team_key, String platform, String version, String tools) {
         JSONObject object = new JSONObject();
         object.put("team_key",team_key);
@@ -69,7 +79,15 @@ public class Reporter {
         object.put("test_name",testName);
         object.put("test_result",result);
         String response = send_request_api("save-test-result",object,tools);
+    }
 
+    public static void sendTestResult(String testName, String result, String tools, String error) {
+        JSONObject object = new JSONObject();
+        object.put("session_id",session_id);
+        object.put("test_name",testName);
+        object.put("test_result",result);
+        object.put("error_log",error);
+        String response = send_request_api("save-test-result",object,tools);
     }
 
     public static void stopTestRunningStatus(String tools) {

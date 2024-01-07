@@ -6,7 +6,6 @@ import org.testng.ITestResult;
 
 
 public class TestNG_Report implements ITestListener {
-    static final String url = Reporter.url;
 
     public static void connect_report(String team_spkey, String platform, String version) {
         Reporter.connect_report(team_spkey,platform,version,"testng");
@@ -26,6 +25,8 @@ public class TestNG_Report implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         String testName = result.getName();
+        Throwable throwable = result.getThrowable();
+        String errorMessage = (throwable != null) ? throwable.getMessage(): "None" ;
         String testDescription = result.getMethod().getDescription();
         Reporter.saveTestResults("Fail",testName,testDescription, "testng");
 

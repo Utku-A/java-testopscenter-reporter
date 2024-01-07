@@ -1,4 +1,4 @@
-# TestOps Center - Tests Result Reporter
+# <img src="https://testopscenter.com/favicon.ico" alt="testopscenter-logo" style="width: 30px;"/> TestOps Center - Tests Result Reporter
 
 ## JUnit 5
 ```Java

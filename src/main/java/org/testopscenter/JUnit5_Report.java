@@ -26,8 +26,9 @@ public class JUnit5_Report implements TestWatcher, AfterAllCallback {
     public void testFailed(ExtensionContext context, Throwable cause) {
         TestWatcher.super.testFailed(context, cause);
         String testName = context.getTestMethod().get().getName();
+        String error = (cause.getMessage() != null) ? cause.getMessage(): "None" ;
         String testDescription = context.getDisplayName();
-        Reporter.saveTestResults("Fail",testName,testDescription, "junit5");
+        Reporter.saveTestResults("Fail",testName,testDescription, "junit5", error);
     }
 
     @Override

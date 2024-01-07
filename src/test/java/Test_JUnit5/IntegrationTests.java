@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testng.Assert;
 import org.testopscenter.JUnit5_Report;
-import org.testopscenter.Reporter;
 
 
 @ExtendWith(JUnit5_Report.class)

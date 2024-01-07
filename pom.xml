@@ -6,9 +6,9 @@
 
     <groupId>org.testopscenter</groupId>
     <artifactId>testopscenter</artifactId>
-    <version>0.1.2</version>
-    <name>TestOps Center Test Result Reporter</name>
-    <description>TestOps Center | Test Result Reporter Alpha v0.1</description>
+    <version>0.1.2-Alpha</version>
+    <name>TestOps Center</name>
+    <description>TestOps Center | Test Result Reporter</description>
     <url>https://testopscenter.com</url>
 
     <properties>
@@ -25,10 +25,12 @@
 
     <developers>
         <developer>
-            <id>TPS-1</id>
+            <id>TOS-1</id>
             <name>Halis Utku Aladağ</name>
             <email>halisutku.aladag@testopscenter.com</email>
             <url>https://testopscenter.com/halisutkualadag</url>
+            <organization>TestOps Center</organization>
+            <organizationUrl>https://testopscenter.com</organizationUrl>
         </developer>
     </developers>
 
@@ -55,8 +57,8 @@
 
     <distributionManagement>
         <repository>
-            <id>maven-releases</id>
-            <url>https://repo.testopscenter.com/repository/maven-releases</url>
+            <id>releases</id>
+            <url>https://repo.testopscenter.com/repository/release</url>
         </repository>
     </distributionManagement>
 
