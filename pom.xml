@@ -6,7 +6,7 @@
 
     <groupId>org.testopscenter</groupId>
     <artifactId>testopscenter</artifactId>
-    <version>0.1.2-Alpha</version>
+    <version>0.1.21</version>
     <name>TestOps Center</name>
     <description>TestOps Center | Test Result Reporter</description>
     <url>https://testopscenter.com</url>
@@ -58,7 +58,7 @@
     <distributionManagement>
         <repository>
             <id>releases</id>
-            <url>https://repo.testopscenter.com/repository/release</url>
+            <url>https://s01.oss.sonatype.org/content/repositories/releases</url>
         </repository>
     </distributionManagement>
 
@@ -109,19 +109,16 @@
 
     <build>
         <plugins>
-            <!-- Javadoc oluşturma -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.4.0</version>
                 <configuration>
-                    <!-- Javadoc konfigürasyonları -->
                     <source>1.8</source>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 
-            <!-- GPG ile dosyaları imzalama -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
